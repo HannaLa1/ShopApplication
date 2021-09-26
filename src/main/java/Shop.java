@@ -11,12 +11,8 @@ public class Shop {
     private final List<Product> orders = new ArrayList<>();
     private final LinkedList<Product> productListSell = new LinkedList<>();
     private final String FILE_NAME_IO = "ShopApplication/src/main/java/ShopUnit13/result.txt";
-    private final String baseFile = "ShopApplication/src/main/java/ShopUnit13/jsonResult.json";
     private final String sellFile = "ShopApplication/src/main/java/ShopUnit13/sellProducts.txt";
     private final DBShop dbShop = new DBShop();
-    private final String INSERT_NEW_PRODUCT = "INSERT INTO products VALUES(?, ?, ?, ?, ?)";
-    private final String SELECT_PRODUCTS = "SELECT * FROM products";
-    private final String SELECT_ORDER_HISTORY = "SELECT * FROM purchasedProducts";
     private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
     private final String UPDATE_PRODUCT = "UPDATE products SET name = ?, price = ? WHERE id = ?";
     private final String INSERT_BUYING_PRODUCT = "INSERT INTO purchasedProducts VALUES(?, ?, ?, ?, ?)";
@@ -27,6 +23,7 @@ public class Shop {
 
         if (flag) {
             products.add(product);
+            String INSERT_NEW_PRODUCT = "INSERT INTO products VALUES(?, ?, ?, ?, ?)";
             try(PreparedStatement preparedStatement = dbShop.getConnection().prepareStatement(INSERT_NEW_PRODUCT)){
                 preparedStatement.setInt(1, product.getId());
                 preparedStatement.setString(2, product.getName());
@@ -131,6 +128,7 @@ public class Shop {
     }
 
     public void getProductsFromDB() throws SQLException {
+        String SELECT_PRODUCTS = "SELECT * FROM products";
         try(Statement statement = dbShop.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet resultSet = statement.executeQuery(SELECT_PRODUCTS)) {
 
@@ -143,6 +141,7 @@ public class Shop {
     }
 
     public void orderHistory() throws SQLException {
+        String SELECT_ORDER_HISTORY = "SELECT * FROM purchasedProducts";
         try(Statement statement = dbShop.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet resultSet = statement.executeQuery(SELECT_ORDER_HISTORY)) {
 
@@ -239,6 +238,7 @@ public class Shop {
 
     public void toJavaObject() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        String baseFile = "ShopApplication/src/main/java/ShopUnit13/jsonResult.json";
         List<Product> productList = Arrays.asList(mapper.readValue(new File(baseFile), Product[].class));
         products.addAll(productList);
     }
