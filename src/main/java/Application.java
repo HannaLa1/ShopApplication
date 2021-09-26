@@ -184,7 +184,7 @@ public class Application {
         return str;
     }
 
-    private void inputFilter() throws SQLException, IOException {
+    private void inputFilter() throws IOException {
         System.out.println("\n---------------------------------------------------------------");
         System.out.println("Вывести информацию [в консоль / в json файл]  (1/0)?");
         System.out.println("---------------------------------------------------------------");
