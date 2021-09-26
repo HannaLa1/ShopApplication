@@ -10,7 +10,7 @@ public class Shop {
     private final List<Product> products = new ArrayList<>();
     private final List<Product> orders = new ArrayList<>();
     private final LinkedList<Product> productListSell = new LinkedList<>();
-    private final String FILE_NAME_IO = "ShopApplication/src/main/java/ShopUnit13/result.txt";
+    //private final String FILE_NAME_IO = "ShopApplication/src/main/java/ShopUnit13/result.txt";
     private final String sellFile = "ShopApplication/src/main/java/ShopUnit13/sellProducts.txt";
     private final DBShop dbShop = new DBShop();
     private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
